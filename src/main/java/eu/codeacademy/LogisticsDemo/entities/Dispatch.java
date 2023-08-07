@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "dispatch")
@@ -21,5 +22,7 @@ public class Dispatch {
     private String Name;
     private String Email;
     private String PhoneNumber;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "load")
@@ -18,6 +19,13 @@ public class Load {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    private Double Weight;
+    private String Origin;
+    private String Destination;
+    private String Description;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
 
 }
