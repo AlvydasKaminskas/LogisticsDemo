@@ -23,13 +23,22 @@ public class Truck {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
+    @Column(name = "license_plate_number")
     private String LicensePlateNumber;
+    @Column(name = "make")
     private String Make;
+    @Column(name = "model")
     private String Model;
+    @Column(name = "year")
     private Date Year;
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToOne
+    @JoinColumn(name = "driver_id")
+    private Driver assignedDriver;
 
 
 

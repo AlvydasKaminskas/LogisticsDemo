@@ -21,12 +21,19 @@ public class Trailer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    @Column(name = "license_plate_number")
     private String LicensePlateNumber;
+    @Column(name = "type")
     private String TrailerType;
+    @Column(name = "is_available")
     private Boolean IsAvailable;
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
+    @OneToOne
+    @JoinColumn(name = "driver_id")
+    private Driver assignedDriver;
 
 
 

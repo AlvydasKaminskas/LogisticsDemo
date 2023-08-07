@@ -19,13 +19,25 @@ public class Load {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    @Column(name = "weight")
     private Double Weight;
+    @Column(name = "origin")
     private String Origin;
+    @Column(name = "destination")
     private String Destination;
+    @Column(name = "Description")
     private String Description;
-
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    @ManyToOne
+    @JoinColumn(name = "driver_id")
+    private Driver assignedDriver;
+
+    @ManyToOne
+    @JoinColumn(name = "dispatch_id")
+    private Dispatch dispatch;
 
 
 }
