@@ -31,6 +31,8 @@ public class Truck {
     private String Model;
     @Column(name = "year")
     private Date Year;
+    @Column(name = "is_available")
+    private Boolean IsAvailable;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "updated_at")

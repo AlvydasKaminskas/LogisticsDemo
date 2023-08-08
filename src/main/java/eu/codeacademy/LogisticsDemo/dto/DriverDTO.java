@@ -22,4 +22,6 @@ public class DriverDTO {
     private String Email;
     private String LicenseNumber;
     private Date LicenseExpiryDate;
+    private Long truckId;
+    private Long trailerId;
 }

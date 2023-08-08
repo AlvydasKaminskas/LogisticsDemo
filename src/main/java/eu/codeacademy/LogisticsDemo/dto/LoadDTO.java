@@ -15,4 +15,7 @@ public class LoadDTO {
     private String Origin;
     private String Destination;
     private  String Description;
+    private Long assignedDriverId; // To represent the ID of the assigned driver
+    private Long dispatchId; // To represent the ID of the dispatch that created the load
+
 }
