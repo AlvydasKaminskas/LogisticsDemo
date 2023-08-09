@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -14,4 +15,7 @@ public class DispatchDTO {
     private String Name;
     private String Email;
     private  String PhoneNumber;
+
+
+
 }

@@ -34,4 +34,13 @@ public class Dispatch {
     @OneToMany(mappedBy = "dispatch")
     private List<Load> loads = new ArrayList<>();
 
+    @PrePersist
+    void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
+    @PreUpdate
+    void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
 }
