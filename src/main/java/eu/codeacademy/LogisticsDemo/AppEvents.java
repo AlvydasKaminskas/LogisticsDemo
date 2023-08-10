@@ -21,11 +21,18 @@ public class AppEvents {
     @EventListener(ApplicationReadyEvent.class)
     public void startApp() {
         if (userRepository.findByUsername("sss") == null) {
-            UserEntity userEntity = new UserEntity();
-            userEntity.setUsername("sss");
-            userEntity.setPassword(passwordEncoder.encode("sss"));
-            userEntity.setRole(Roles.ADMIN);
-            userRepository.save(userEntity);
+            UserEntity admin = new UserEntity();
+            admin.setUsername("sss");
+            admin.setPassword(passwordEncoder.encode("sss"));
+            admin.setRole(Roles.ADMIN);
+            userRepository.save(admin);
+        } else if (userRepository.findByUsername("aaa")== null) {
+            UserEntity user = new UserEntity();
+            user.setUsername("aaa");
+            user.setPassword(passwordEncoder.encode("aaa"));
+            user.setRole(Roles.USER);
+            userRepository.save(user);
+
         }
     }
 }

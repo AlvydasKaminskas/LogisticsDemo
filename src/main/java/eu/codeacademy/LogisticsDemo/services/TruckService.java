@@ -7,6 +7,8 @@ import eu.codeacademy.LogisticsDemo.entities.Truck;
 import eu.codeacademy.LogisticsDemo.repositories.DriverRepository;
 import eu.codeacademy.LogisticsDemo.repositories.TruckRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +25,13 @@ public class TruckService {
 
     public List<TruckDTO> getAllTruckDTO() {
         return TruckConverter.toDTOList(truckRepository.findAll());
+    }
+
+    public Page<Truck> getAllTruckDTOByModel(String model, Pageable pageable) {
+        if (model != null) {
+            return this.truckRepository.findTrucksByModel(model, pageable);
+        }
+        return truckRepository.findTrucksByModel(null, pageable);
     }
 
     public TruckDTO getTruckDTOById(Long id) {

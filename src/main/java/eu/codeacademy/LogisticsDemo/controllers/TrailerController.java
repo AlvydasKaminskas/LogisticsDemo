@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/trailers")
+@RequestMapping("/drivers/trailers")
+@PreAuthorize("hasRole('ADMIN')")
 public class TrailerController {
 
     @Autowired

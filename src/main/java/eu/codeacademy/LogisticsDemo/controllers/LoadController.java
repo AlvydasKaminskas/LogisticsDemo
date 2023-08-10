@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/loads")
+@PreAuthorize("hasRole('USER')")
 public class LoadController {
     @Autowired
     private LoadService loadService;

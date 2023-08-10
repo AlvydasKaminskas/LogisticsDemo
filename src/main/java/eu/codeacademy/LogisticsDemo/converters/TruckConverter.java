@@ -41,9 +41,9 @@ public abstract class TruckConverter {
         return truck;
     }
 
-    public static List<TruckDTO> toDTOList(List<Truck> trucks) {
+    public static List<TruckDTO> toDTOList(Iterable<Truck> trucks) {
         List<TruckDTO> truckDTOList = new ArrayList<>();
-        if (trucks != null && !trucks.isEmpty()) {
+        if (trucks != null ) {
             for (Truck trk : trucks) {
                 truckDTOList.add(toDTO(trk));
             }

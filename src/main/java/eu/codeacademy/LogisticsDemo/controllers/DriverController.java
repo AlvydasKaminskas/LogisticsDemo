@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/drivers")
+@PreAuthorize("hasRole('USER')")
 public class DriverController {
     @Autowired
     private DriverService driverService;

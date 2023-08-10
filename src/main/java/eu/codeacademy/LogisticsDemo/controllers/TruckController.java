@@ -1,8 +1,11 @@
 package eu.codeacademy.LogisticsDemo.controllers;
 
+import eu.codeacademy.LogisticsDemo.converters.TruckConverter;
 import eu.codeacademy.LogisticsDemo.dto.TruckDTO;
 import eu.codeacademy.LogisticsDemo.services.TruckService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,7 +16,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/trucks")
+@RequestMapping("/drivers/trucks")
+@PreAuthorize("hasRole('ADMIN')")
 public class TruckController {
 
     @Autowired
@@ -26,16 +30,23 @@ public class TruckController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TruckDTO> getTrailerById(@PathVariable Long id) {
+    public ResponseEntity<TruckDTO> getTruckById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(this.truckService.getTruckDTOById(id));
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Truck by ID: %s not found", id));
         }
     }
+        @GetMapping("/searchByModel")
+    public ResponseEntity<List<TruckDTO>> getTruckByModel(@RequestParam String model, Pageable pageable) {
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(TruckConverter.toDTOList(truckService.getAllTruckDTOByModel(model, pageable)));
+    }
 
     @PostMapping
-    public ResponseEntity<TruckDTO> addTrailer(@RequestBody TruckDTO truckDTO) {
+    public ResponseEntity<TruckDTO> addTruck(@RequestBody TruckDTO truckDTO) {
         TruckDTO createdTruckDTO = truckService.createTruck(truckDTO);
         return new ResponseEntity<>(createdTruckDTO, HttpStatus.CREATED);
     }
@@ -50,7 +61,6 @@ public class TruckController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteTruck(@PathVariable Long id) {
         try {
             this.truckService.deleteTruck(id);
