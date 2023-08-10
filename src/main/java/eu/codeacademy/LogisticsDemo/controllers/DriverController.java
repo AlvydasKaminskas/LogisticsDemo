@@ -1,6 +1,4 @@
 package eu.codeacademy.LogisticsDemo.controllers;
-
-import eu.codeacademy.LogisticsDemo.dto.DispatchDTO;
 import eu.codeacademy.LogisticsDemo.dto.DriverDTO;
 import eu.codeacademy.LogisticsDemo.services.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.EntityNotFoundException;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 

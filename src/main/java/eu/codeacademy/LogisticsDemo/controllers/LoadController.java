@@ -1,15 +1,15 @@
 package eu.codeacademy.LogisticsDemo.controllers;
 
-import eu.codeacademy.LogisticsDemo.dto.DriverDTO;
 import eu.codeacademy.LogisticsDemo.dto.LoadDTO;
 import eu.codeacademy.LogisticsDemo.services.LoadService;
 import org.springframework.beans.factory.annotation.Autowired;
+
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -44,7 +44,7 @@ public class LoadController {
         try {
             return ResponseEntity.ok(loadService.updateLoad(loadDTO));
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Load by ID: %s not found", loadDTO.getId()));
         }
     }
     @DeleteMapping("/{id}")
@@ -54,7 +54,7 @@ public class LoadController {
             this.loadService.deleteLoad(id);
             return ResponseEntity.noContent().build();
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Load by ID: %s not found", id));
         }
     }
 

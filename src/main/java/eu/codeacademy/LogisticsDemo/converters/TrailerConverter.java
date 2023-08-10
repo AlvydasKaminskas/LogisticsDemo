@@ -15,8 +15,10 @@ public abstract class TrailerConverter {
             trailerDTO.setId(trailer.getId());
             trailerDTO.setLicensePlateNumber(trailer.getLicensePlateNumber());
             trailerDTO.setTrailerType(trailer.getTrailerType());
-            trailerDTO.setIsAvailable(trailer.getIsAvailable());
-            trailerDTO.setDriverId(trailer.getAssignedDriver1().getId());
+            if (trailer.getAssignedDriver1() != null) {
+                trailerDTO.setDriverId(trailer.getAssignedDriver1().getId());
+            }
+
         }
         return trailerDTO;
     }
@@ -27,7 +29,6 @@ public abstract class TrailerConverter {
             trailer.setId(trailerDTO.getId());
             trailer.setLicensePlateNumber(trailerDTO.getLicensePlateNumber());
             trailer.setTrailerType(trailerDTO.getTrailerType());
-            trailer.setIsAvailable(trailerDTO.getIsAvailable());
             if (trailerDTO.getDriverId() != null) {
                 Driver driverEntity = new Driver();
                 driverEntity.setId(trailerDTO.getDriverId());
@@ -38,12 +39,11 @@ public abstract class TrailerConverter {
         return trailer;
     }
 
-    public static List<TrailerDTO> toDTOList(List<Trailer> trailers){
-        List<TrailerDTO> trailerDTOList = null;
-        if (trailers != null && !trailers.isEmpty()){
-            trailerDTOList = new ArrayList<>();
-            for (Trailer tr : trailers){
-                trailerDTOList.add(toDTO(tr));
+    public static List<TrailerDTO> toDTOList(List<Trailer> trailers) {
+        List<TrailerDTO> trailerDTOList = new ArrayList<>();
+        if (trailers != null && !trailers.isEmpty()) {
+            for (Trailer t : trailers) {
+                trailerDTOList.add(toDTO(t));
             }
         }
         return trailerDTOList;

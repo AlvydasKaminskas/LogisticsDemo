@@ -45,7 +45,7 @@ public class Driver {
     private Truck truck;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "trailer", referencedColumnName ="id")
+    @JoinColumn(name = "trailer_id", referencedColumnName ="id")
     private Trailer trailer;
 
     @PrePersist

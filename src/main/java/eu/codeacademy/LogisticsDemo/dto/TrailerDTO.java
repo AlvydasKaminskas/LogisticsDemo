@@ -13,6 +13,5 @@ public class TrailerDTO {
     private Long id;
     private String LicensePlateNumber;
     private String TrailerType;
-    private Boolean IsAvailable;
     private Long driverId;
 }
