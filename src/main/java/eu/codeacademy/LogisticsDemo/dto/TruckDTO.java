@@ -17,6 +17,5 @@ public class TruckDTO {
     private String Make;
     private String Model;
     private Date Year;
-    private Boolean IsAvailable;
     private Long DriverId;
 }

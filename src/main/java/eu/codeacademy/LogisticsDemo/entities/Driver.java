@@ -41,7 +41,7 @@ public class Driver {
     private LocalDateTime updatedAt;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "truck", referencedColumnName ="id")
+    @JoinColumn(name = "truck_id", referencedColumnName ="id")
     private Truck truck;
 
     @OneToOne(cascade = CascadeType.ALL)

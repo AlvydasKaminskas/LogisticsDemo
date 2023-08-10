@@ -4,7 +4,7 @@ import eu.codeacademy.LogisticsDemo.dto.LoadDTO;
 import eu.codeacademy.LogisticsDemo.services.LoadService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-//import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +48,7 @@ public class LoadController {
         }
     }
     @DeleteMapping("/{id}")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteLoad(@PathVariable Long id) {
         try {
             this.loadService.deleteLoad(id);

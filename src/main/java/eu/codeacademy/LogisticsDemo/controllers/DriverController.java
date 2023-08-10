@@ -1,10 +1,11 @@
 package eu.codeacademy.LogisticsDemo.controllers;
+
 import eu.codeacademy.LogisticsDemo.dto.DriverDTO;
 import eu.codeacademy.LogisticsDemo.services.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,8 +22,9 @@ public class DriverController {
     @GetMapping//veikia bet negauda trk trl id
     public ResponseEntity<List<DriverDTO>> getAllDrivers() {
         List<DriverDTO> driverDTOS = driverService.getAllDriversDTO();
-        return  ResponseEntity.ok(driverDTOS);
+        return ResponseEntity.ok(driverDTOS);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<DriverDTO> getDriverById(@PathVariable Long id) {
         try {
@@ -31,6 +33,7 @@ public class DriverController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
+
     @PostMapping
     public ResponseEntity<DriverDTO> addDispatch(@RequestBody DriverDTO driverDTO) {
         DriverDTO createdDriverDTO = driverService.createDriver(driverDTO);
@@ -45,8 +48,9 @@ public class DriverController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
+
     @DeleteMapping("/{id}")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteDriver(@PathVariable Long id) {
         try {
             this.driverService.deleteDriver(id);

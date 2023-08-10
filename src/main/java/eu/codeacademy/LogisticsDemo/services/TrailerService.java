@@ -49,10 +49,11 @@ public class TrailerService {
         }
         if (trailerDTO.getDriverId() != null) {
             Optional<Driver> driver = driverRepository.findById(trailerDTO.getDriverId());
-            if (!driver.isEmpty()) {
-                trailerToUpdate.setAssignedDriver1(driver.get());
-            } else {
+            if (driver.isEmpty()) {
                 throw new NoSuchElementException(DriverExceptionTxt + trailerDTO.getDriverId());
+            } else {
+                trailerToUpdate.setAssignedDriver1(driver.get());
+
             }
         }
         trailerRepository.save(trailerToUpdate);
