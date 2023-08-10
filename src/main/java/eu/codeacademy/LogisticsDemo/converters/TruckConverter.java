@@ -1,8 +1,13 @@
 package eu.codeacademy.LogisticsDemo.converters;
 
+import eu.codeacademy.LogisticsDemo.dto.TrailerDTO;
 import eu.codeacademy.LogisticsDemo.dto.TruckDTO;
 import eu.codeacademy.LogisticsDemo.entities.Driver;
+import eu.codeacademy.LogisticsDemo.entities.Trailer;
 import eu.codeacademy.LogisticsDemo.entities.Truck;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class TruckConverter {
 
@@ -37,4 +42,15 @@ public abstract class TruckConverter {
         }
         return truck;
     }
+    public static List<TruckDTO> toDTOList(List<Truck> trucks){
+        List<TruckDTO> truckDTOList = null;
+        if (trucks != null && !trucks.isEmpty()){
+            truckDTOList = new ArrayList<>();
+            for (Truck trk : trucks){
+                truckDTOList.add(toDTO(trk));
+            }
+        }
+        return truckDTOList;
+    }
+
 }

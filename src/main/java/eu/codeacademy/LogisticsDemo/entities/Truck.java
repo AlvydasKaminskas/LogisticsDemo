@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.security.PrivateKey;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -38,9 +37,17 @@ public class Truck {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToOne
-    @JoinColumn(name = "driver_id")
+    @OneToOne(mappedBy = "truck",cascade = CascadeType.ALL)
     private Driver assignedDriver;
+
+    @PrePersist
+    void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
+    @PreUpdate
+    void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 
 
 

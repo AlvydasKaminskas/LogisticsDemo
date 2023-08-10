@@ -5,12 +5,14 @@ import eu.codeacademy.LogisticsDemo.services.DispatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityNotFoundException;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -30,7 +32,7 @@ public class DispatchController {
     public ResponseEntity<DispatchDTO> getDispatchById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(dispatchService.getDispatchDTOById(id));
-        } catch (EntityNotFoundException e) {
+        } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
@@ -45,17 +47,18 @@ public class DispatchController {
     public ResponseEntity<DispatchDTO> updateDispatch(@RequestBody DispatchDTO dispatchDTO) {
         try {
             return ResponseEntity.ok(dispatchService.updateDispatch(dispatchDTO));
-        } catch (EntityNotFoundException e) {
+        } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
     @DeleteMapping("/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteDispatch(@PathVariable Long id) {
         try {
             this.dispatchService.deleteDispatch(id);
             return ResponseEntity.noContent().build();
-        } catch (EntityNotFoundException e) {
+        } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }

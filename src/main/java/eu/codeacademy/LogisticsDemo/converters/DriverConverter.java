@@ -5,12 +5,15 @@ import eu.codeacademy.LogisticsDemo.entities.Driver;
 import eu.codeacademy.LogisticsDemo.entities.Trailer;
 import eu.codeacademy.LogisticsDemo.entities.Truck;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class DriverConverter {
 
     public static DriverDTO toDTO(Driver driver) {
-        DriverDTO driverDTO = null;
+        DriverDTO driverDTO = new DriverDTO();
         if (driver != null) {
-            driverDTO.setID(driver.getId());
+            driverDTO.setId(driver.getId());
             driverDTO.setFirstName(driver.getFirstName());
             driverDTO.setLastName(driver.getLastName());
             driverDTO.setAge(driver.getAge());
@@ -18,16 +21,21 @@ public abstract class DriverConverter {
             driverDTO.setEmail(driver.getEmail());
             driverDTO.setLicenseNumber(driver.getLicenseNumber());
             driverDTO.setLicenseExpiryDate(driver.getLicenseExpiryDate());
-            driverDTO.setTruckId(driver.getTruck().getId());
-            driverDTO.setTrailerId(driver.getTrailer().getId());
+            if (driver.getTruck() != null) {
+                driverDTO.setTruckId(driver.getTruck().getId());
+            }
+            if (driver.getTrailer() != null) {
+                driverDTO.setTrailerId(driver.getTrailer().getId());
+            }
+
         }
         return driverDTO;
     }
 
     public static Driver toEntity(DriverDTO driverDTO) {
-        Driver driver = null;
+        Driver driver = new Driver();
         if (driverDTO != null) {
-            driver.setId(driverDTO.getID());
+            driver.setId(driverDTO.getId());
             driver.setFirstName(driverDTO.getFirstName());
             driver.setLastName(driverDTO.getLastName());
             driver.setAge(driverDTO.getAge());
@@ -48,4 +56,17 @@ public abstract class DriverConverter {
         }
         return driver;
     }
+
+    public static List<DriverDTO> toDTOList(List<Driver> drivers) {
+        List<DriverDTO> driverDTOList = new ArrayList<>();
+        if (drivers != null && !drivers.isEmpty()) {
+            for (Driver d : drivers) {
+                driverDTOList.add(toDTO(d));
+            }
+
+        }
+        return driverDTOList;
+    }
+
+
 }

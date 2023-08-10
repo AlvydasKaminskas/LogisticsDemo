@@ -40,10 +40,21 @@ public class Driver {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy = "assignedDriver")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "truck", referencedColumnName ="id")
     private Truck truck;
 
-    @OneToOne(mappedBy = "assignedDriver")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "trailer", referencedColumnName ="id")
     private Trailer trailer;
+
+    @PrePersist
+    void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
+    @PreUpdate
+    void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 
 }

@@ -31,9 +31,17 @@ public class Trailer {
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-    @OneToOne
-    @JoinColumn(name = "driver_id")
-    private Driver assignedDriver;
+    @OneToOne(mappedBy = "trailer",cascade = CascadeType.ALL)
+    private Driver assignedDriver1;
+
+    @PrePersist
+    void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
+    @PreUpdate
+    void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 
 
 

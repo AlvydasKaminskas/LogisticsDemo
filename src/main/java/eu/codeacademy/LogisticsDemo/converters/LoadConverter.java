@@ -10,19 +10,19 @@ import java.util.List;
 
 public abstract class LoadConverter {
     public static LoadDTO toDTO(Load load) {
-        LoadDTO loadDTO = null;
+        LoadDTO loadDTO = new LoadDTO();
         loadDTO.setId(load.getId());
         loadDTO.setWeight(load.getWeight());
         loadDTO.setOrigin(load.getOrigin());
         loadDTO.setDestination(load.getDestination());
         loadDTO.setDescription(load.getDescription());
-        loadDTO.setAssignedDriverId(load.getAssignedDriver().getId());
+        loadDTO.setAssignedDriverId(load.getDriver().getId());
         loadDTO.setDispatchId(load.getDispatch().getId());
         return loadDTO;
     }
 
     public static Load toEntity(LoadDTO loadDTO) {
-        Load load = null;
+        Load load = new Load();
         if (loadDTO != null) {
             load.setId(loadDTO.getId());
             load.setWeight(loadDTO.getWeight());
@@ -32,7 +32,7 @@ public abstract class LoadConverter {
             if (loadDTO.getAssignedDriverId() != null) {
                 Driver driverEntity = new Driver();
                 driverEntity.setId(loadDTO.getId());
-                load.setAssignedDriver(driverEntity);
+                load.setDriver(driverEntity);
             }
             if (loadDTO.getDispatchId() != null) {
                 Dispatch dispatchEntity = new Dispatch();
@@ -43,7 +43,7 @@ public abstract class LoadConverter {
         return load;
     }
 
-    public static List<LoadDTO> EntitiesToDTOs(Iterable<Load> loadList) {
+    public static List<LoadDTO> toDTOList(Iterable<Load> loadList) {
         List<LoadDTO> loadDTOList = null;
         if (loadList != null) {
             loadDTOList = new ArrayList<>();

@@ -33,11 +33,20 @@ public class Load {
     private LocalDateTime updatedAt;
     @ManyToOne
     @JoinColumn(name = "driver_id")
-    private Driver assignedDriver;
+    private Driver driver;
 
     @ManyToOne
     @JoinColumn(name = "dispatch_id")
     private Dispatch dispatch;
+
+    @PrePersist
+    void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
+    @PreUpdate
+    void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 
 
 }
